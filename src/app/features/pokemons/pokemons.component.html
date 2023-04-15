@@ -1,0 +1,50 @@
+
+<ng-container *ngIf="pokemons$ | async as pokemonsResponse">
+  <div class="container pb-3">
+    <p>pokemons works!</p>
+    <div class="row">
+      <div class="col-auto">
+        <button class="btn btn-primary" *ngIf="pokemonsResponse.previous" (click)="previous()">Previous</button>    
+      </div>
+      <div class="col"></div>
+      <div class="col-auto">
+        <button class="btn btn-primary" *ngIf="pokemonsResponse.next" (click)="next()">Next</button>
+      </div>
+    </div>
+    <ng-container *ngFor="let pokemon of pokemonsResponse.results">
+      <ng-container *ngIf="transform(pokemon.url | async) as pkm">
+        <div class="row">
+          <div class="col-auto">
+            #{{ pkm.id }}
+          </div>
+          <div class="col-3">
+            <img [src]="pkm.sprites.front_default"/>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col">
+                <p class="fw-bold">{{ pkm.name }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <ng-container *ngFor="let type of pkm.types">
+                <div class="col-auto">
+                  {{ type.type.name }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="row">
+      <div class="col-auto">
+        <button class="btn btn-primary" *ngIf="pokemonsResponse.previous" (click)="previous()">Previous</button>    
+      </div>
+      <div class="col"></div>
+      <div class="col-auto">
+        <button class="btn btn-primary" *ngIf="pokemonsResponse.next" (click)="next()">Next</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
