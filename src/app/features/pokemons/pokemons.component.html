@@ -1,7 +1,6 @@
 
 <ng-container *ngIf="pokemons$ | async as pokemonsResponse">
   <div class="container pb-3">
-    <p>pokemons works!</p>
     <div class="row">
       <div class="col-auto">
         <button class="btn btn-primary" *ngIf="pokemonsResponse.previous" (click)="previous()">Previous</button>    
@@ -13,28 +12,7 @@
     </div>
     <ng-container *ngFor="let pokemon of pokemonsResponse.results">
       <ng-container *ngIf="transform(pokemon.url | async) as pkm">
-        <div class="row">
-          <div class="col-3">
-            <img [src]="pkm.sprites.front_default"/>
-          </div>
-          <div class="col-6">
-            <div class="row">
-              <div class="col px-1">
-                <span class="fw-bold">#{{ pkm.id }}</span>
-                <span class="ps-2">{{ pkm.name }}</span>
-              </div>
-            </div>
-            <div class="row">
-              <ng-container *ngFor="let type of pkm.types">
-                <div class="col-auto px-1">
-                  <div class="px-1 text-uppercase rounded" [ngClass]="'bg-' + type.type.name">
-                    {{ type.type.name }}
-                  </div>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-        </div>
+        <app-pokemon [pokemon]="pkm"></app-pokemon>
       </ng-container>
     </ng-container>
     <div class="row">

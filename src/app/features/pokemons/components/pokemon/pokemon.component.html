@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-3">
+    <img [src]="pokemon.sprites.front_default"/>
+  </div>
+  <div class="col-6">
+    <div class="row">
+      <div class="col px-1">
+        <span class="fw-bold">#{{ pokemon.id }}</span>
+        <span class="ps-2">{{ pokemon.name }}</span>
+      </div>
+    </div>
+    <div class="row">
+      <ng-container *ngFor="let type of pokemon.types">
+        <div class="col-auto px-1">
+          <div class="px-1 text-uppercase rounded" [ngClass]="'bg-' + type.type.name">
+            {{ type.type.name }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
